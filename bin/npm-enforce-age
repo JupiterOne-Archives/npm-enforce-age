@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+'use strict'
+const enforceMaxNPMTokenAge = require('../src/index.js');
+enforceMaxNPMTokenAge(process.argv[2] || 30);

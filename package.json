@@ -1,0 +1,23 @@
+{
+  "name": "@jupiterone/npm-enforce-age",
+  "version": "1.0.0",
+  "description": "Scan a user's NPM tokens and fail with exit code 1 if any exceed a maximum age in days.",
+  "repository": "https://github.com/JupiterOne/npm-enforce-age",
+  "directories": {
+    "src": "./src",
+    "bin": "./bin"
+  },
+  "bin": {
+    "npm-enforce-age": "./bin/npm-enforce-age"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run test",
+    "test": "echo no tests yet",
+    "lint": "eslint --ignore-path .gitignore ."
+  },
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "eslint": "4.19.1",
+    "jest": "^23.5.0"
+  }
+}
