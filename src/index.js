@@ -1,24 +1,33 @@
 'use strict';
 
-const sh = require('child_process').execSync;
+const fetchNPMTokens = require('./npmTokens');
 
 function enforceMaxNPMTokenAge(days) {
   const maxAgeInSeconds = 60 * 60 * 24 * days;
   const expiredTokens = [];
 
+  process.exitCode = 0;
+
   let tokens = [];
   try {
-    tokens = JSON.parse(sh('npm token list --json').toString());
+    // Prevent Yarn from overriding registry
+    // See https://github.com/yarnpkg/yarn/issues/2935
+    const original_config_registry = process.env['npm_config_registry'];
+    delete process.env['npm_config_registry'];
+
+    tokens = fetchNPMTokens();
+
+    process.env['npm_config_registry'] = original_config_registry;
   } catch (err) {
     console.error(err);
     console.log('Please login with "npm login".');
     process.exitCode = 1;
-    return;
+    return false;
   }
 
   tokens.forEach(token => {
     const ageInSeconds = Math.floor((Date.now() - Date.parse(token.created)) / 1000);
-    if (ageInSeconds >= maxAgeInSeconds) {
+    if (ageInSeconds > maxAgeInSeconds) {
       expiredTokens.push(token);
     }
   });
@@ -31,7 +40,7 @@ function enforceMaxNPMTokenAge(days) {
     console.log();
     process.exitCode = 1;
   });
-  process.exitCode = 0;
+  return process.exitCode === 0;
 }
 
 module.exports = enforceMaxNPMTokenAge;

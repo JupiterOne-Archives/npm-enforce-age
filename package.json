@@ -11,8 +11,8 @@
     "npm-enforce-age": "./bin/npm-enforce-age"
   },
   "scripts": {
-    "prepublishOnly": "npm run test",
-    "test": "echo no tests yet",
+    "pretest": "yarn lint",
+    "test": "jest --silent",
     "lint": "eslint --ignore-path .gitignore ."
   },
   "license": "MPL-2.0",

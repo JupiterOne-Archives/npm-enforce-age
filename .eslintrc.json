@@ -92,7 +92,7 @@
       }
     ],
     "no-shadow-restricted-names": "error",
-    "no-undef": "error",
+    "no-undef": "off",
     "no-undef-init": "error",
     "no-unused-vars": [
       "error",
