@@ -35,10 +35,10 @@ function enforceMaxNPMTokenAge(days) {
   expiredTokens.forEach(token => {
     const id = token.key.substr(0, 6);
     console.log('Your npm token with id ' + id + ' is too old! It was created on ' + token.created);
-    console.log('Please issue the commands:');
-    console.log('npm token create --read-only');
-    console.log('(and use this new token, then:)');
-    console.log('npm token revoke ' + id);
+    console.log('Please take the following steps:');
+    console.log('1. npm token create --read-only');
+    console.log('2. Paste this new token into your ~/.npmrc');
+    console.log('3. npm token revoke ' + id);
     console.log();
     process.exitCode = 1;
   });
