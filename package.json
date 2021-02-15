@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/npm-enforce-age",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scan a user's NPM tokens and fail with exit code 1 if any exceed a maximum age in days.",
   "repository": "https://github.com/JupiterOne/npm-enforce-age",
   "directories": {
